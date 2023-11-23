@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menstrual Health Chatbot</title>
+    <link rel="icon" type="image/x-icon" href="Icon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="header-context">
+                    <video autoplay loop  muted plays-inline class="back-video" >
+                        <source src="video.mp4" type="video/mp4"> 
+                    </video>
+                <ul>
+                    <li class="logo1"><img src="Header Icon.png" alt="Chatbot Icon"></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chatbot.html">Chatbot</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li id="logout"><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        
+        <div class="content" id="content">
+            <h1>Menstrual Health Chatbot</h1>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>Chat with our Menstrual Health Chatbot</h2>
+                </div>
+                <div class="chat-log" id="chat-log">
+                    <p class="bot-message">Hello! How can I assist you with your menstrual health today?</p>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="Type your message..." autofocus>
+                    <button id="send-button" type="button">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const chatLog = document.getElementById('chat-log');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        function appendUserMessage(message) {
+            const userMessage = document.createElement('p');
+            userMessage.textContent = message;
+            chatLog.appendChild(userMessage);
+        }
+
+        function appendBotMessage(message) {
+            const botMessage = document.createElement('p');
+            botMessage.classList.add('bot-message');
+            botMessage.textContent = message;
+            chatLog.appendChild(botMessage);
+        }
+
+        sendButton.addEventListener('click', function() {
+            const userMessage = userInput.value;
+            appendUserMessage(userMessage);
+            appendBotMessage("You said: " + userMessage);
+
+            userInput.value = '';
+        });
+
+        userInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    })
+</script>
+</html>

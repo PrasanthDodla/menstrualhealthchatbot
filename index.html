@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menstrual Health Chatbot</title>
+    <link rel="icon" type="image/x-icon" href="Icon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 36px;
+            color: #009688;
+            margin-bottom: 20px;
+        }
+
+        .menstrual-health-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #start-chat-button {
+            background-color: #009688;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .logo img {
+            width: 80px; /* Adjust the size as needed */
+        }
+
+        .logo h1 {
+            color: #009688;
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        #start-chat-button:hover {
+            background-color: #00756c;
+        }
+
+        .header-left {
+            float: left;
+            padding: 10px; /* Adjust padding as needed */
+        }
+
+        .header-left img {
+            width: 40px; /* Adjust the size as needed */
+        }
+
+        .back-video{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        @media(min-aspect-ratio: 16/9){
+            .back-video{
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="header-context">
+                <video autoplay loop  muted plays-inline class="back-video" >
+                    <source src="video.mp4" type="video/mp4"> 
+                </video>
+                <ul>
+                    <li class="logo1"><img src="Header Icon.png" alt="Chatbot Icon"></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chatbot.html">Chatbot</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li id="logout"><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+            
+        </nav>
+    </header>
+    <div class="container">
+        <div class="content" id="content">
+            <div class="logo">
+                <img src="Icon.png" alt="Chatbot Logo">
+                <h1>Menstrual Health Chatbot</h1>
+            </div>
+            <img src="menstrual.jpg" alt="Menstrual Health" class="menstrual-health-image">
+            <p>Empowering Women's Health</p>
+            <p>Get answers to your menstrual health questions and concerns with our friendly chatbot.</p>
+            <button id="start-chat-button" type="button">Start Chat</button>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const startChatButton = document.getElementById('start-chat-button');
+        
+        startChatButton.addEventListener('click', function() {
+            // Redirect to the chatbot page
+            window.location.href = 'chatbot.html';
+        });
+    });
+</script>
+</html>

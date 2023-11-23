@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="Icon.png">
+    <title>Menstrual Health Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="style1.css">
+</head>
+<body>
+    <div class="header-context">
+        <video autoplay loop  muted plays-inline class="back-video" >
+            <source src="https://static.videezy.com/system/resources/previews/000/051/397/original/Virus_Research_Animate_Background.mp4" type="video/mp4"> 
+        </video>
+    </div>
+    <h1>Registration Form</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required autofocus><br><br>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required autofocus><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required autofocus><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="menstrual">Menstrual Health Condition:</label>
+        <input type="text" id="menstrual" name="menstrual" required autofocus><br><br>
+
+        <button type="button" id="signUp">Sign Up</button>
+    </form>
+
+    <h3><p>Already have an account? <a href="login.html" id="login">Login</a></p></h3>
+    
+</body>
+<script type="module">
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getDatabase, set, ref,update } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNHBBnv3w5_U3Cz4stT0RHOXrPdtA5X3g",
+      authDomain: "menstrual-health-1f92e.firebaseapp.com",
+      databaseURL: "https://menstrual-health-1f92e-default-rtdb.firebaseio.com",
+      projectId: "menstrual-health-1f92e",
+      storageBucket: "menstrual-health-1f92e.appspot.com",
+      messagingSenderId: "303677899342",
+      appId: "1:303677899342:web:e3bec1da4b04dee33b791f"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    signUp.addEventListener('click',(e) =>{
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var name = document.getElementById('name').value;
+        var age = document.getElementById('age').value;
+        var menstrual = document.getElementById('menstrual').value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            
+            const user = userCredential.user;
+
+            set(ref(database,'users/' + user.uid),{
+                name : name,
+                age: age,
+                email: email,
+                menstrual: menstrual
+
+            })
+
+
+            alert('Registration Successfull!');
+            window.location.href = "login.html";
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            
+            alert(errorMessage);
+    });
+
+    });
+    
+    login.addEventListener('click', e => {
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            
+            const dt = Date();
+            update(ref(database,'users/' + user.uid),{
+                last_login : dt, 
+
+            })
+            
+            alert('Login SuccessFully!');
+            window.location.href = "index.html";
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            alert(errorMessage);
+        });
+    });
+
+    onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+    } else {
+        // User is signed out
+        // ...
+    }
+    });
+
+  </script>
+
+</html>
+
